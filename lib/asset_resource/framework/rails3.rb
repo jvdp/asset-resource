@@ -8,7 +8,8 @@ class AssetResource::Railtie < Rails::Railtie
     config.app_middleware.use AssetResource::Middleware,
       :base_path => Rails.root.join("public"),
       :handlers  => { :javascripts => "text/javascript",
-                      :stylesheets => "text/css" }
+                      :stylesheets => "text/css" },
+      :asset_headers => Rails.env.development? &&  { "Cache-Control" => "max-age=0, private, must-revalidate" }
   end
 end
 
